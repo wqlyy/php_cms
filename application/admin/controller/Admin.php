@@ -7,14 +7,7 @@ class Admin extends Base{
         $this->_admin = new AdminModel();
     }
     public function index(){
-        // $res = db('admin')->field('username')->select();
         $res = $this->_admin->get_list();
-        // foreach ($res as $key => $value) {
-        //     $data['id']=$value->id;
-        //     $data['username']=$value->username;
-        //     $data['password']=$value->password;
-        //     $result[]=$data;
-        // }
         $this->assign('admin_list',$res);
         return view('list');
     }
@@ -33,7 +26,25 @@ class Admin extends Base{
     	}
     	return view('add');
     }
-    public function edit(){
+    public function edit($id){
+        if(!$id){
+            $this->error('参数非法');
+        }
+        $res=$this->_admin->getAdminById($id);
+        if(!$res){
+            $this->error('管理员不存在');
+        }
+        
+        if(request()->isPost()){
+            $data = input('post.');
+            $data['password'] = $res['password'] == $data['password'] ? $data['password'] : md5('salt_'.md5($data['password']));
+            $res = $this->_admin->updateAdmin($data);
+            if($res){
+                $this->success('修改成功');
+            }
+            return;
+        }
+        $this->assign('admin',$res);
     	return view('edit');
     }
 }

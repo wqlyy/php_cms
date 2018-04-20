@@ -18,4 +18,13 @@ class Admin extends Model {
 	public function get_list(){
 		return $this->paginate(5);
 	}
+	public function getAdminById($id){
+		return $this->getById($id);
+	}
+	public function updateAdmin($data){
+		return $this->save([
+		    'username'  => $data['username'],
+		    'password' => $data['password'],
+		],['id' => $data['id']]);
+	}
 }
