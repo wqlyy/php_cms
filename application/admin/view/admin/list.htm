@@ -34,52 +34,32 @@
                     <table class="table table-bordered table-hover">
                       <thead class="">
                         <tr>
-                          <th class="text-center">ID</th>
-                          <th class="text-center">用户名称</th>
-                          <th class="text-center">操作</th>
+                          <th class="text-center" width="8%">ID</th>
+                          <th class="text-left">用户名称</th>
+                          <th class="text-center" width="16%">操作</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {volist name='admin_list' id='admin'}
                         <tr>
-                          <td align="center">6</td>
-                          <td align="center">test</td>
+                          <td align="center">{$admin['id']}</td>
+                          <td align="left">{$admin['username']}</td>
                           <td align="center">
-														<a href="{:url('admin/edit',array('id'=>1))}" class="btn btn-primary btn-sm shiny">
+														<a href="{:url('admin/edit',array('id'=>$admin['id']))}" class="btn btn-primary btn-sm shiny">
 															<i class="fa fa-edit"></i> 编辑
 														</a>
-														<a href="#" onClick="warning('确实要删除吗', '/admin/user/del/id/6.html')" class="btn btn-danger btn-sm shiny">
+														<a href="#" onClick="warning('确实要删除吗', '{:url('admin/del',array('id'=>$admin['id']))}')" class="btn btn-danger btn-sm shiny">
 															<i class="fa fa-trash-o"></i>删除
 														</a>
                           </td>
                         </tr>
-                        <tr>
-                          <td align="center">7</td>
-                          <td align="center">aaaaaa</td>
-                          <td align="center">
-                            <a href="/admin/user/edit/id/6.html" class="btn btn-primary btn-sm shiny">
-															<i class="fa fa-edit"></i> 编辑
-														</a>
-														<a href="#" onClick="warning('确实要删除吗', '/admin/user/del/id/6.html')" class="btn btn-danger btn-sm shiny">
-															<i class="fa fa-trash-o"></i>删除
-														</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td align="center">8</td>
-                          <td align="center">bbb</td>
-                          <td align="center">
-                            <a href="/admin/user/edit/id/6.html" class="btn btn-primary btn-sm shiny">
-															<i class="fa fa-edit"></i> 编辑
-														</a>
-														<a href="#" onClick="warning('确实要删除吗', '/admin/user/del/id/6.html')" class="btn btn-danger btn-sm shiny">
-															<i class="fa fa-trash-o"></i>删除
-														</a>
-                          </td>
-                        </tr>
+                        {/volist}
                       </tbody>
                     </table>
                   </div>
-                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->分页展示</div>
+                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
+                    {$admin_list->render()}
+                  </div>
                 </div>
               </div>
             </div>
