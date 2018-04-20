@@ -37,6 +37,12 @@ class Admin extends Base{
         
         if(request()->isPost()){
             $data = input('post.');
+            if(!$data['username']){
+                $this->error('用户名不能为空');
+            }
+            if(!$data['password']){
+                $this->error('密码不能为空');
+            }
             $data['password'] = $res['password'] == $data['password'] ? $data['password'] : md5('salt_'.md5($data['password']));
             $res = $this->_admin->updateAdmin($data);
             if($res){
@@ -46,5 +52,15 @@ class Admin extends Base{
         }
         $this->assign('admin',$res);
     	return view('edit');
+    }
+    public function del($id,$role){
+        if($id==1 || $role==1){
+            $this->error('删除失败，你没有权限删除超级管理员');
+        }
+        if($this->_admin->delAdmin($id)){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
     }
 }

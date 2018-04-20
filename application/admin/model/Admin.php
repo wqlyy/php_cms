@@ -22,9 +22,17 @@ class Admin extends Model {
 		return $this->getById($id);
 	}
 	public function updateAdmin($data){
-		return $this->save([
+		$res = $this->save([
 		    'username'  => $data['username'],
 		    'password' => $data['password'],
 		],['id' => $data['id']]);
+		if($res==0 || $res){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function delAdmin($id){
+		return $this->destroy(['id' => $id]);
 	}
 }
