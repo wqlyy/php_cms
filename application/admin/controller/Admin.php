@@ -3,9 +3,7 @@ namespace app\admin\controller;
 use app\admin\controller\Base;
 use app\admin\model\Admin as AdminModel;
 class Admin extends Base{
-    public function _initialize(){
-        $this->_admin = new AdminModel();
-    }
+
     public function index(){
         $res = $this->_admin->get_list();
         $this->assign('admin_list',$res);
@@ -18,7 +16,7 @@ class Admin extends Base{
             $res =  $this->_admin->add_admin($data);
     		// $res = db('admin')->insert($data);
     		if($res){
-    			$this->success('添加成功');
+    			$this->success('添加成功','index');
     		}else{
     			$this->error('添加失败');
     		}
@@ -46,7 +44,7 @@ class Admin extends Base{
             $data['password'] = $res['password'] == $data['password'] ? $data['password'] : md5('salt_'.md5($data['password']));
             $res = $this->_admin->updateAdmin($data);
             if($res){
-                $this->success('修改成功');
+                $this->success('修改成功','index');
             }
             return;
         }
@@ -62,5 +60,9 @@ class Admin extends Base{
         }else{
             $this->error('删除失败');
         }
+    }
+    public function logout(){
+        session(null);
+        $this->success('退出成功','login/index');
     }
 }

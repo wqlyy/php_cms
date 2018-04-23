@@ -35,4 +35,18 @@ class Admin extends Model {
 	public function delAdmin($id){
 		return $this->destroy(['id' => $id]);
 	}
+	public function login($data){
+		$admin = $this->getByUsername($data['username']);
+		if(!$admin){
+			return 1;//用户不存在
+		}else{
+			if($admin['password'] == md5('salt_'.md5($data['password']))){
+				session('id',$admin['id']);
+				session('user',$admin['username']);
+				return 2;//登录成功
+			}else{
+				return 3;//登录失败
+			}
+		}
+	}
 }
