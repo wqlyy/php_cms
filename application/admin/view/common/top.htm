@@ -18,8 +18,11 @@
       <!-- Account Area and Settings -->
       <div class="navbar-header pull-right">
         <div class="navbar-account">
-          <ul class="account-area">
+          <ul class="account-area nav">
             <li>
+             {if condition="$Request.session.user eq null" }
+             <a href="{:url('login/index')}">登录</a>
+             {else/}
               <a class="login-area dropdown-toggle" data-toggle="dropdown">
                 <div class="avatar" title="View your public profile">
                   <img src="__ADMIN__/images/adam-jansen.jpg">
@@ -28,19 +31,22 @@
                   <h2><span class="profile"><span>{$Request.session.user}</span></span></h2>
                 </section>
               </a>
+             {/if}
               <!--Login Area Dropdown-->
               <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                 <li class="username"><a>David Stevenson</a></li>
+                {if condition = '$Request.session.user neq null' }
                 <li class="dropdown-footer">
                   <a href="{:url('admin/logout')}">
-										退出登录
-									</a>
+                    退出登录
+                  </a>
                 </li>
                 <li class="dropdown-footer">
                   <a href="{:url('admin/edit',array('id'=>$Request.session.id))}">
 										修改密码
 									</a>
                 </li>
+                {/if}
               </ul>
               <!--/Login Area Dropdown-->
             </li>

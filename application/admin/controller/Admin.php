@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 use app\admin\controller\Base;
-use app\admin\model\Admin as AdminModel;
+
 class Admin extends Base{
 
     public function index(){

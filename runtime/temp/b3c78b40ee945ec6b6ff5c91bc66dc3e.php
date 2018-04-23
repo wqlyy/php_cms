@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp\www\bick\public/../application/admin\view\index\index.htm";i:1524193477;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524194796;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\edit.htm";i:1524215231;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524194796;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -89,6 +89,7 @@
   <div class="main-container container-fluid">
     <div class="page-container">
       <!-- Page Sidebar -->
+       <!-- Page Sidebar -->
 <div class="page-sidebar" id="sidebar">
   <!-- Page Sidebar Header-->
   <div class="sidebar-header-wrapper">
@@ -154,21 +155,54 @@
         <!-- Page Breadcrumb -->
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
-            <li class="active">控制面板</li>
+            <li><a href="#">系统</a></li>
+            <li><a href="<?php echo url('admin/index'); ?>">管理员管理</a></li>
+            <li class="active">修改管理员</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <div style="text-align:center; line-height:1000%; font-size:24px;">
-            童老师THinkPHP5.0正式版 第三季 实战开发大型CMS
-            
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">修改管理员</span>
+                </div>
+                <div class="widget-body">
+                  <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" method="post">
+                      <input type="hidden" name="id" value="<?php echo $admin['id']; ?>">
+                      <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label no-padding-right">用户名</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" value="<?php echo $admin['username']; ?>" name="username" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">密码</label>
+                        <div class="col-sm-6">
+                         <input class="form-control" value="<?php echo $admin['password']; ?>" name="password" required="" type="password">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 不修改则默认为原密码</p>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">保存信息</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /Page Body -->
       </div>
       <!-- /Page Content -->
-    </div> 
+    </div>
   </div>
   <!--Basic Scripts-->
   <script src="/bick/public/static/admin/style/jquery_002.js"></script>

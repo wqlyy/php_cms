@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
-
+use app\admin\model\Admin as AdminModel;
 /**
 * 
 */
