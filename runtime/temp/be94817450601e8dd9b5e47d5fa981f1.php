@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524216523;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524468202;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524194796;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524216523;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -42,8 +42,11 @@
       <!-- Account Area and Settings -->
       <div class="navbar-header pull-right">
         <div class="navbar-account">
-          <ul class="account-area">
+          <ul class="account-area nav">
             <li>
+             <?php if(\think\Request::instance()->session('user') == null): ?>
+             <a href="<?php echo url('login/index'); ?>">登录</a>
+             <?php else: ?>
               <a class="login-area dropdown-toggle" data-toggle="dropdown">
                 <div class="avatar" title="View your public profile">
                   <img src="/bick/public/static/admin/images/adam-jansen.jpg">
@@ -52,19 +55,22 @@
                   <h2><span class="profile"><span><?php echo \think\Request::instance()->session('user'); ?></span></span></h2>
                 </section>
               </a>
+             <?php endif; ?>
               <!--Login Area Dropdown-->
               <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                 <li class="username"><a>David Stevenson</a></li>
+                <?php if(\think\Request::instance()->session('user') != null): ?>
                 <li class="dropdown-footer">
                   <a href="<?php echo url('admin/logout'); ?>">
-										退出登录
-									</a>
+                    退出登录
+                  </a>
                 </li>
                 <li class="dropdown-footer">
                   <a href="<?php echo url('admin/edit',array('id'=>\think\Request::instance()->session('id'))); ?>">
 										修改密码
 									</a>
                 </li>
+                <?php endif; ?>
               </ul>
               <!--/Login Area Dropdown-->
             </li>
@@ -107,6 +113,21 @@
 						<span class="menu-text">管理列表</span>
 						<i class="menu-expand"></i>
 					</a>
+        </li>
+      </ul>
+    </li>
+     <li>
+      <a href="#" class="menu-dropdown">
+        <i class="menu-icon fa fa-folder"></i>
+        <span class="menu-text">栏目管理</span>
+        <i class="menu-expand"></i>
+      </a>
+      <ul class="submenu">
+        <li>
+          <a href="<?php echo url('cate/index'); ?>">
+            <span class="menu-text">栏目列表</span>
+            <i class="menu-expand"></i>
+          </a>
         </li>
       </ul>
     </li>

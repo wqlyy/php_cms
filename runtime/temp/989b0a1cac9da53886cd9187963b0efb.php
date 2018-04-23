@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp\www\bick\public/../application/admin\view\index\index.htm";i:1524193477;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470212;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524475899;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -89,6 +89,7 @@
   <div class="main-container container-fluid">
     <div class="page-container">
       <!-- Page Sidebar -->
+       <!-- Page Sidebar -->
 <div class="page-sidebar" id="sidebar">
   <!-- Page Sidebar Header-->
   <div class="sidebar-header-wrapper">
@@ -123,7 +124,7 @@
       </a>
       <ul class="submenu">
         <li>
-          <a href="/admin/document/index.html">
+          <a href="<?php echo url('cate/index'); ?>">
             <span class="menu-text">栏目列表</span>
             <i class="menu-expand"></i>
           </a>
@@ -169,21 +170,76 @@
         <!-- Page Breadcrumb -->
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
-            <li class="active">控制面板</li>
+            <li><a href="#">系统</a></li>
+            <li><a href="<?php echo url('admin/index'); ?>">栏目管理</a></li>
+            <li class="active">新增栏目</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <div style="text-align:center; line-height:1000%; font-size:24px;">
-            童老师THinkPHP5.0正式版 第三季 实战开发大型CMS
-            
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">新增栏目</span>
+                </div>
+                <div class="widget-body">
+                  <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" method="post">
+                      <div class="form-group">
+                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
+                        <div class="col-sm-6">
+                          <select name="pid" style="width: 100%;">
+                                <option value="0" selected="selected">顶级栏目</option>
+                                <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                <option value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
+                                <?php endforeach; endif; else: echo "" ;endif; ?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" placeholder="" name="catename" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                       
+                      <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
+                        <div class="col-sm-6">
+                          <div class="radio col-sm-3">
+                            <label>
+                              <input checked type="radio" value="1" name="type" />
+                              <span class="text">列表</span>
+                            </label>
+                          </div>
+                          <div class="radio col-sm-3">
+                            <label>
+                              <input type="radio" class="inverted" name="type" value="2" />
+                              <span class="text">单页</span>
+                            </label>
+                          </div>
+                        </div>
+                       
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">保存信息</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /Page Body -->
       </div>
       <!-- /Page Content -->
-    </div> 
+    </div>
   </div>
   <!--Basic Scripts-->
   <script src="/bick/public/static/admin/style/jquery_002.js"></script>

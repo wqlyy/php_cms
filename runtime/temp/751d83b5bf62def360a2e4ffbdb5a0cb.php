@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp\www\bick\public/../application/admin\view\index\index.htm";i:1524193477;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470212;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524475766;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +22,7 @@
 
 <body>
   <!-- 头部 -->
-  <div class="navbar">
+ <div class="navbar">
   <div class="navbar-inner">
     <div class="navbar-container">
       <!-- Navbar Barnd -->
@@ -89,6 +89,7 @@
   <div class="main-container container-fluid">
     <div class="page-container">
       <!-- Page Sidebar -->
+    	 <!-- Page Sidebar -->
 <div class="page-sidebar" id="sidebar">
   <!-- Page Sidebar Header-->
   <div class="sidebar-header-wrapper">
@@ -123,7 +124,7 @@
       </a>
       <ul class="submenu">
         <li>
-          <a href="/admin/document/index.html">
+          <a href="<?php echo url('cate/index'); ?>">
             <span class="menu-text">栏目列表</span>
             <i class="menu-expand"></i>
           </a>
@@ -169,21 +170,70 @@
         <!-- Page Breadcrumb -->
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
-            <li class="active">控制面板</li>
+            <li><a href="#">系统</a></li>
+            <li class="active">栏目管理</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <div style="text-align:center; line-height:1000%; font-size:24px;">
-            童老师THinkPHP5.0正式版 第三季 实战开发大型CMS
-            
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('cate/add'); ?>'"> <i class="fa fa-plus"></i> Add
+          </button>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="flip-scroll">
+                    <table class="table table-bordered table-hover">
+                      <thead class="">
+                        <tr>
+                          <th class="text-center" width="8%">ID</th>
+                          <th class="text-left">栏目名称</th>
+                          <th class="text-left">栏目类型</th>
+                          <th class="text-left">上级栏目</th>
+                          <th class="text-center" width="16%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php if(is_array($catelist) || $catelist instanceof \think\Collection || $catelist instanceof \think\Paginator): $i = 0; $__LIST__ = $catelist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                        <tr>
+                          <td align="center"><?php echo $vo['id']; ?></td>
+                          <td align="left"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*8)?><?php echo $vo['catename']; ?></td>
+                          <td align="left">
+                            <?php if($vo['type'] == 1): ?>
+                            列表
+                            <?php else: ?>
+                            单页
+                            <?php endif; ?>
+                          </td>
+                          <td align="left"><?php echo $vo['pid']; ?></td>
+                          <td align="center">
+														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
+															<i class="fa fa-edit"></i> 编辑
+														</a>
+                           
+														<a href="javascript:;" onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+															<i class="fa fa-trash-o"></i>删除
+														</a>
+                           
+                          </td>
+                        </tr>
+                      <?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /Page Body -->
       </div>
       <!-- /Page Content -->
-    </div> 
+    </div>
   </div>
   <!--Basic Scripts-->
   <script src="/bick/public/static/admin/style/jquery_002.js"></script>
