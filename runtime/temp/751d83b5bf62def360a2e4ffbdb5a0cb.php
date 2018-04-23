@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524475766;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524476012;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -190,7 +190,6 @@
                           <th class="text-center" width="8%">ID</th>
                           <th class="text-left">栏目名称</th>
                           <th class="text-left">栏目类型</th>
-                          <th class="text-left">上级栏目</th>
                           <th class="text-center" width="16%">操作</th>
                         </tr>
                       </thead>
@@ -206,7 +205,6 @@
                             单页
                             <?php endif; ?>
                           </td>
-                          <td align="left"><?php echo $vo['pid']; ?></td>
                           <td align="center">
 														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
 															<i class="fa fa-edit"></i> 编辑

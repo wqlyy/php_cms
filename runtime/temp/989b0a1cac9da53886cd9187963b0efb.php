@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524475899;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524476056;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -171,7 +171,7 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="<?php echo url('admin/index'); ?>">栏目管理</a></li>
+            <li><a href="<?php echo url('cate/index'); ?>">栏目管理</a></li>
             <li class="active">新增栏目</li>
           </ul>
         </div>
