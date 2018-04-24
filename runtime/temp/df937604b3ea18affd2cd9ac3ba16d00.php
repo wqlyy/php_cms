@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524556632;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\link\list.htm";i:1524559207;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -192,7 +192,7 @@
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('cate/add'); ?>'"> <i class="fa fa-plus"></i> Add
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('link/add'); ?>'"> <i class="fa fa-plus"></i> Add
           </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -205,26 +205,22 @@
                           <tr>
                             <th class="text-center" width="8%">ID</th>
                             <th class="text-center" width="8%">排序</th>
-                            <th class="text-left">栏目名称</th>
-                            <th class="text-left">栏目类型</th>
+                            <th class="text-center">标题</th>
+                            <th class="text-center">链接地址</th>
+                            <th class="text-left">描述</th>
                             <th class="text-center" width="16%">操作</th>
                           </tr>
                         </thead>
                         <tbody>
-                        <?php if(is_array($catelist) || $catelist instanceof \think\Collection || $catelist instanceof \think\Paginator): $i = 0; $__LIST__ = $catelist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                        <?php if(is_array($links) || $links instanceof \think\Collection || $links instanceof \think\Paginator): $i = 0; $__LIST__ = $links;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                           <tr>
                             <td align="center"><?php echo $vo['id']; ?></td>
-                            <td align="center"><input style="width: 60px;text-align: center;" type="text" value="<?php echo $vo['sort']; ?>" name="<?php echo $vo['id']; ?>"></td>
-                            <td align="left"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*8)?><?php echo $vo['catename']; ?></td>
-                            <td align="left">
-                              <?php if($vo['type'] == 1): ?>
-                              文章列表
-                              <?php elseif($vo['type'] == 3): ?>
-                              图片列表
-                              <?php else: ?>
-                              单页
-                              <?php endif; ?>
+                            <td align="center">
+                              <input style="width: 50px;text-align: center;" type="text" value="<?php echo $vo['sort']; ?>" name="<?php echo $vo['id']; ?>">
                             </td>
+                            <td align="center"><?php echo $vo['title']; ?></td>
+                            <td align="center"><a title="<?php echo $vo['title']; ?>" target="_blank" href="<?php echo '//'.$vo['url'];?>"><?php echo $vo['url']; ?></a></td>
+                            <td align="left"><?php echo $vo['desc']; ?></td>
                             <td align="center">
   														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
   															<i class="fa fa-edit"></i> 编辑
@@ -238,7 +234,7 @@
                           </tr>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
                         <tr>
-                          <td colspan="5">
+                          <td colspan="6">
                             <input class="btn btn-sm btn-primary" type="submit" value="排序">
                           </td>
                         </tr>
@@ -247,7 +243,7 @@
                     </form>
                   </div>
                   <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
-                   
+                   <?php echo $links->render(); ?>
                   </div>
                 </div>
               </div>

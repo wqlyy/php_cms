@@ -27,6 +27,7 @@ class Cate extends Base{
 			}else{
 				$this->error('添加栏目失败');
 			}
+			return;
 		}
 		$cateres = $this->_cate->catetree();
 		$this->assign('cateres',$cateres);

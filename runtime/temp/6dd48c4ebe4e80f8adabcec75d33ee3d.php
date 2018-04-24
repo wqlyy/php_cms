@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524556632;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\link\edit.htm";i:1524558285;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +22,7 @@
 
 <body>
   <!-- 头部 -->
- <div class="navbar">
+  <div class="navbar">
   <div class="navbar-inner">
     <div class="navbar-container">
       <!-- Navbar Barnd -->
@@ -89,7 +89,7 @@
   <div class="main-container container-fluid">
     <div class="page-container">
       <!-- Page Sidebar -->
-    	 <!-- Page Sidebar -->
+       <!-- Page Sidebar -->
 <div class="page-sidebar" id="sidebar">
   <!-- Page Sidebar Header-->
   <div class="sidebar-header-wrapper">
@@ -186,68 +186,51 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li class="active">栏目管理</li>
+            <li><a href="<?php echo url('link/index'); ?>">友情链接管理</a></li>
+            <li class="active">新增链接</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('cate/add'); ?>'"> <i class="fa fa-plus"></i> Add
-          </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">新增链接</span>
+                </div>
                 <div class="widget-body">
-                  <div class="flip-scroll">
-                    <form method="post" action="">
-                      <table class="table table-bordered table-hover">
-                        <thead class="">
-                          <tr>
-                            <th class="text-center" width="8%">ID</th>
-                            <th class="text-center" width="8%">排序</th>
-                            <th class="text-left">栏目名称</th>
-                            <th class="text-left">栏目类型</th>
-                            <th class="text-center" width="16%">操作</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php if(is_array($catelist) || $catelist instanceof \think\Collection || $catelist instanceof \think\Paginator): $i = 0; $__LIST__ = $catelist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                          <tr>
-                            <td align="center"><?php echo $vo['id']; ?></td>
-                            <td align="center"><input style="width: 60px;text-align: center;" type="text" value="<?php echo $vo['sort']; ?>" name="<?php echo $vo['id']; ?>"></td>
-                            <td align="left"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*8)?><?php echo $vo['catename']; ?></td>
-                            <td align="left">
-                              <?php if($vo['type'] == 1): ?>
-                              文章列表
-                              <?php elseif($vo['type'] == 3): ?>
-                              图片列表
-                              <?php else: ?>
-                              单页
-                              <?php endif; ?>
-                            </td>
-                            <td align="center">
-  														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
-  															<i class="fa fa-edit"></i> 编辑
-  														</a>
-                             
-  														<a href="javascript:;" onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
-  															<i class="fa fa-trash-o"></i>删除
-  														</a>
-                             
-                            </td>
-                          </tr>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                        <tr>
-                          <td colspan="5">
-                            <input class="btn btn-sm btn-primary" type="submit" value="排序">
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
+                  <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" method="post">
+                     <input type="hidden" name="id" value="<?php echo $link['id']; ?>">
+                      <div class="form-group">
+                        <label for="catename" class="col-sm-2 control-label no-padding-right">链接名称</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" value="<?php echo $link['title']; ?>" name="title" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                       
+                      <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">链接描述</label>
+                        <div class="col-sm-6">
+                          <input value="<?php echo $link['desc']; ?>" class="form-control" name="desc" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                       <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">链接地址</label>
+                        <div class="col-sm-6">
+                          <input value="<?php echo $link['url']; ?>" class="form-control" name="url" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">保存信息</button>
+                        </div>
+                      </div>
                     </form>
-                  </div>
-                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
-                   
                   </div>
                 </div>
               </div>

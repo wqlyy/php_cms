@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+{include file="common/head" /}
+
+<body>
+  <!-- 头部 -->
+ {include file="common/top" /}
+  <!-- /头部 -->
+  <div class="main-container container-fluid">
+    <div class="page-container">
+      <!-- Page Sidebar -->
+    	{include file="common/leftnav" /}
+      <!-- /Page Sidebar -->
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Page Breadcrumb -->
+        <div class="page-breadcrumbs">
+          <ul class="breadcrumb">
+            <li><a href="#">系统</a></li>
+            <li class="active">栏目管理</li>
+          </ul>
+        </div>
+        <!-- /Page Breadcrumb -->
+        <!-- Page Body -->
+        <div class="page-body">
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('link/add')}'"> <i class="fa fa-plus"></i> Add
+          </button>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="flip-scroll">
+                    <form method="post" action="">
+                      <table class="table table-bordered table-hover">
+                        <thead class="">
+                          <tr>
+                            <th class="text-center" width="8%">ID</th>
+                            <th class="text-center" width="8%">排序</th>
+                            <th class="text-center">标题</th>
+                            <th class="text-center">链接地址</th>
+                            <th class="text-left">描述</th>
+                            <th class="text-center" width="16%">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="links" id="vo"}
+                          <tr>
+                            <td align="center">{$vo['id']}</td>
+                            <td align="center">
+                              <input style="width: 50px;text-align: center;" type="text" value="{$vo['sort']}" name="{$vo['id']}">
+                            </td>
+                            <td align="center">{$vo['title']}</td>
+                            <td align="center"><a title="{$vo['title']}" target="_blank" href="<?php echo '//'.$vo['url'];?>">{$vo['url']}</a></td>
+                            <td align="left">{$vo['desc']}</td>
+                            <td align="center">
+  														<a href="{:url('edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
+  															<i class="fa fa-edit"></i> 编辑
+  														</a>
+                             
+  														<a href="javascript:;" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$vo['id']))}')" class="btn btn-danger btn-sm shiny">
+  															<i class="fa fa-trash-o"></i>删除
+  														</a>
+                             
+                            </td>
+                          </tr>
+                        {/volist}
+                        <tr>
+                          <td colspan="6">
+                            <input class="btn btn-sm btn-primary" type="submit" value="排序">
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                  </div>
+                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
+                   {$links->render()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Page Body -->
+      </div>
+      <!-- /Page Content -->
+    </div>
+  </div>
+  <!--Basic Scripts-->
+  <script src="__ADMIN__/style/jquery_002.js"></script>
+  <script src="__ADMIN__/style/bootstrap.js"></script>
+  <script src="__ADMIN__/style/jquery.js"></script>
+  <!--Beyond Scripts-->
+  <script src="__ADMIN__/style/beyond.js"></script>
+</body>
+
+</html>
