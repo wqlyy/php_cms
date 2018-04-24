@@ -16,5 +16,18 @@ class Article extends Model{
 		        }
 			}
 		});
+		Article::event('before_update',function($article){
+			if($_FILES['pic']['tmp_name']){
+				$file = request()->file('pic');
+				$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+				if($info){
+					$src ='http://127.0.0.1/bick/public' . DS . 'uploads'. DS .$info->getSaveName();
+		           $article['pic'] = $src;
+		        }else{
+		            // 上传失败获取错误信息
+		           $this->error('图片上传失败');
+		        }
+			}
+		});
 	}
 }

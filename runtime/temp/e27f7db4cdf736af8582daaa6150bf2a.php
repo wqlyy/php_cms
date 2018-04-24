@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\wamp\www\bick\public/../application/admin\view\article\edit.htm";i:1524550132;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\wamp\www\bick\public/../application/admin\view\article\edit.htm";i:1524551958;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -194,55 +194,59 @@
                 <div class="widget-body">
                   <div id="horizontal-form">
                     <form enctype="multipart/form-data" class="form-horizontal" role="form" action="" method="post">
+                      <input type="hidden" value="<?php echo $articles['id']; ?>" name="id">
                       <div class="form-group">
                         <label for="title" class="col-sm-2 control-label no-padding-right">文章标题</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="title" required="" type="text">
+                          <input class="form-control" value="<?php echo $articles['title']; ?>" name="title" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
                       <div class="form-group">
                         <label for="author" class="col-sm-2 control-label no-padding-right">文章作者</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="author" required="" type="text">
+                          <input value="<?php echo $articles['author']; ?>" class="form-control" name="author" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
                       <div class="form-group">
                         <label for="keywords" class="col-sm-2 control-label no-padding-right">关键词</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="keywords" required="" type="text">
+                          <input value="<?php echo $articles['keywords']; ?>" class="form-control" name="keywords" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
                       <div class="form-group">
                         <label for="desc" class="col-sm-2 control-label no-padding-right">文章描述</label>
                         <div class="col-sm-6">
-                         <textarea name="desc" class="form-control"></textarea>
+                         <textarea name="desc" class="form-control"><?php echo $articles['desc']; ?></textarea>
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
                       <div class="form-group">
                         <label for="pic" class="col-sm-2 control-label no-padding-right">文章缩略图</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                           <input name="pic" type="file">
                         </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
+
+                        <p class="help-block col-sm-3"><?php if($articles['pic'] != ''): ?><img style="width: 50px;height: 50px;" src="<?php echo $articles['pic']; ?>"><?php else: ?>暂无缩略图<?php endif; ?></p>
                       </div>
         
                       <div class="form-group">
                         <label for="cateid" class="col-sm-2 control-label no-padding-right">所属栏目</label>
                         <div class="col-sm-6">
                           <select name="cateid" style="width: 100%;">
-                                <option value="0" selected="selected"></option>
-                            </select>
+                            <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                            <option <?php if($articles['cateid'] == $vo['id']): ?>selected<?php endif; ?> value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
+                            <?php endforeach; endif; else: echo "" ;endif; ?>
+                          </select>
                         </div>
                       </div>
                      
                       <div class="form-group">
                         <label for="content" class="col-sm-2 control-label no-padding-right">文章内容</label>
                         <div class="col-sm-8">
-                         <textarea name="content" id="editor" style="height:300px;"></textarea>
+                         <textarea name="content" id="editor" style="height:300px;"><?php echo $articles['content']; ?></textarea>
                         </div>
                       </div>
                       
