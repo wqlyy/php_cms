@@ -7,6 +7,14 @@ class Cate extends Base{
 		'delsoncate' => ['only'=>'del'],
 	]; 
 	public function index(){
+		if(request()->isPost()){
+			$sorts = input('post.');
+			foreach ($sorts as $k => $v) {
+				$this->_cate->update(['id'=>$k,'sort'=>$v]);
+			}
+			$this->success('更新排序成功','index');
+			return;
+		}
 		$catelist = $this->_cate->catetree();
 		$this->assign('catelist',$catelist);
 		return view('list');

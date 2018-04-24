@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524476012;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524538382;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -184,41 +184,50 @@
               <div class="widget">
                 <div class="widget-body">
                   <div class="flip-scroll">
-                    <table class="table table-bordered table-hover">
-                      <thead class="">
+                    <form method="post" action="">
+                      <table class="table table-bordered table-hover">
+                        <thead class="">
+                          <tr>
+                            <th class="text-center" width="8%">ID</th>
+                            <th class="text-center" width="8%">排序</th>
+                            <th class="text-left">栏目名称</th>
+                            <th class="text-left">栏目类型</th>
+                            <th class="text-center" width="16%">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php if(is_array($catelist) || $catelist instanceof \think\Collection || $catelist instanceof \think\Paginator): $i = 0; $__LIST__ = $catelist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                          <tr>
+                            <td align="center"><?php echo $vo['id']; ?></td>
+                            <td align="center"><input style="width: 60px;text-align: center;" type="text" value="<?php echo $vo['sort']; ?>" name="<?php echo $vo['id']; ?>"></td>
+                            <td align="left"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*8)?><?php echo $vo['catename']; ?></td>
+                            <td align="left">
+                              <?php if($vo['type'] == 1): ?>
+                              列表
+                              <?php else: ?>
+                              单页
+                              <?php endif; ?>
+                            </td>
+                            <td align="center">
+  														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
+  															<i class="fa fa-edit"></i> 编辑
+  														</a>
+                             
+  														<a href="javascript:;" onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+  															<i class="fa fa-trash-o"></i>删除
+  														</a>
+                             
+                            </td>
+                          </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
                         <tr>
-                          <th class="text-center" width="8%">ID</th>
-                          <th class="text-left">栏目名称</th>
-                          <th class="text-left">栏目类型</th>
-                          <th class="text-center" width="16%">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php if(is_array($catelist) || $catelist instanceof \think\Collection || $catelist instanceof \think\Paginator): $i = 0; $__LIST__ = $catelist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                        <tr>
-                          <td align="center"><?php echo $vo['id']; ?></td>
-                          <td align="left"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*8)?><?php echo $vo['catename']; ?></td>
-                          <td align="left">
-                            <?php if($vo['type'] == 1): ?>
-                            列表
-                            <?php else: ?>
-                            单页
-                            <?php endif; ?>
-                          </td>
-                          <td align="center">
-														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
-															<i class="fa fa-edit"></i> 编辑
-														</a>
-                           
-														<a href="javascript:;" onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
-															<i class="fa fa-trash-o"></i>删除
-														</a>
-                           
+                          <td colspan="5">
+                            <input class="btn btn-sm btn-primary" type="submit" value="排序">
                           </td>
                         </tr>
-                      <?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    </form>
                   </div>
                   <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
                    

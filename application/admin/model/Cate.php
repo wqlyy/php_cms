@@ -3,7 +3,7 @@ namespace app\admin\model;
 use think\Model;
 class Cate extends Model{
 	public function catetree(){
-		$cateres = $this->select();
+		$cateres = $this->order('sort desc')->select();
 		return $this->sort($cateres);
 	}
 	public function sort($data,$pid=0,$level=0){
