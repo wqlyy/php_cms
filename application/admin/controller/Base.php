@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use app\admin\model\Admin as AdminModel;
 use app\admin\model\Cate as CateModel;
+use app\admin\model\Article as ArticleModel;
 /**
 * 
 */
@@ -14,6 +15,7 @@ class Base extends Controller
         }
         $this->_admin = new AdminModel();
         $this->_cate = new CateModel();
+        $this->_article = new ArticleModel();
 	}
 	
 	// function __construct(argument)
