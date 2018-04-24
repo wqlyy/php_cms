@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524476056;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524470781;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524556517;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556257;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -139,7 +139,7 @@
 			</a>
       <ul class="submenu">
         <li>
-          <a href="/admin/document/index.html">
+          <a href="<?php echo url('article/index'); ?>">
 						<span class="menu-text">文章列表</span>
 						<i class="menu-expand"></i>
 					</a>
@@ -212,13 +212,19 @@
                           <div class="radio col-sm-3">
                             <label>
                               <input checked type="radio" value="1" name="type" />
-                              <span class="text">列表</span>
+                              <span class="text">文章列表</span>
                             </label>
                           </div>
                           <div class="radio col-sm-3">
                             <label>
                               <input type="radio" class="inverted" name="type" value="2" />
                               <span class="text">单页</span>
+                            </label>
+                          </div>
+                          <div class="radio col-sm-3">
+                            <label>
+                              <input type="radio" class="inverted" name="type" value="3" />
+                              <span class="text">图片列表</span>
                             </label>
                           </div>
                         </div>

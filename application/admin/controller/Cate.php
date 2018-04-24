@@ -43,6 +43,11 @@ class Cate extends Base{
 	public function delsoncate(){
 		$cateid = input('id');
 		$sondids = $this->_cate->getchildrenid($cateid);
+		$allcateid = $sondids;
+		$allcateid[] = $cateid;
+		foreach ($allcateid as $k => $v) {
+			$this->_article->where(array('cateid'=>$v))->delete();
+		}
 		if($sondids){
 			$this->_cate->destroy($sondids);
 		}
