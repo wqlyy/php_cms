@@ -47,4 +47,12 @@ class Article extends Base{
 		));
 		return view();
 	}
+	public function del(){
+		$del = $this->_article->destroy(input('id'));
+		if($del){
+			$this->success('删除成功','index');
+		}else{
+			$this->error('删除失败');
+		}
+	}
 }
