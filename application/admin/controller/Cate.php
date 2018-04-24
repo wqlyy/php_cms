@@ -39,4 +39,22 @@ class Cate extends Base{
 			$this->_cate->destroy($sondids);
 		}
 	}
+	public function edit(){
+		if(request()->isPost()){
+			$res = $this->_cate->save(input('post.'),['id'=>input('id')]);
+			if(!$res){
+				$this->error('修改失败');
+			}else{
+				$this->success('修改成功','index');
+			}
+			return;
+		}
+		$cateres = $this->_cate->catetree();
+		$cates = $this->_cate->find(input('id'));
+		$this->assign(array(
+			'cateres'=>$cateres,
+			'cates' => $cates,
+		));
+		return view();
+	}
 }

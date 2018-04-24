@@ -18,8 +18,8 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="{:url('admin/index')}">管理员管理</a></li>
-            <li class="active">修改管理员</li>
+            <li><a href="{:url('cate/index')}">栏目管理</a></li>
+            <li class="active">编辑栏目</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
@@ -29,25 +29,48 @@
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
                 <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">修改管理员</span>
+                    <span class="widget-caption">编辑栏目</span>
                 </div>
                 <div class="widget-body">
                   <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="" method="post">
-                      <input type="hidden" name="id" value="{$admin['id']}">
+                      <input type="hidden" value="{$cates['id']}" name="id"/>
                       <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label no-padding-right">用户名</label>
+                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
                         <div class="col-sm-6">
-                          <input class="form-control" value="{$admin['username']}" name="username" required="" type="text">
+                          <select name="pid" style="width: 100%;">
+                                <option value="0" selected="selected">顶级栏目</option>
+                                {volist name="cateres" id="vo"}
+                                <option {if condition="$cates['pid'] == $vo['id']"}selected{/if} value="{$vo.id}">{if condition="$vo['level'] neq 0"}|{/if}<?php echo str_repeat('-',$vo['level']*4)?>{$vo.catename}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" value="{$cates.catename}" name="catename" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
+                       
                       <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">密码</label>
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
                         <div class="col-sm-6">
-                         <input class="form-control" value="{$admin['password']}" name="password" required="" type="password">
+                          <div class="radio col-sm-3">
+                            <label>
+                              <input {if condition="$cates['type'] eq 1"}checked='checked'{/if} type="radio" value="1" name="type" />
+                              <span class="text">列表</span>
+                            </label>
+                          </div>
+                          <div class="radio col-sm-3">
+                            <label>
+                              <input {if condition="$cates['type'] eq 2"}checked='checked'{/if} type="radio" name="type" value="2" />
+                              <span class="text">单页</span>
+                            </label>
+                          </div>
                         </div>
-                        <p class="help-block col-sm-4 red">* 不修改则默认为原密码</p>
+                       
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
