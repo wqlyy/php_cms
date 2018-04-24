@@ -18,7 +18,12 @@ class Link extends Base{
 	}
 	public function add(){
 		if(request()->isPost()){
-			$add=$this->_link->save(input('post.'));
+			$data = input('post.');
+			$validate = \think\Loader::validate('Link');
+			if(!$validate->scene('add')->check($data)){
+				$this->error($validate->getError());
+			}
+			$add=$this->_link->save($data);
 			if($add){
 				$this->success('添加链接成功','index');
 			}else{
@@ -30,11 +35,16 @@ class Link extends Base{
 	}
 	public function edit(){
 		if(request()->isPost()){
-			$res = $this->_link->save(input('post.'),['id'=>input('id')]);
-			if(!$res){
-				$this->error('修改失败');
-			}else{
+			$data=input('post.');
+			$validate = \think\Loader::validate('Link');
+			if(!$validate->scene('edit')->check($data)){
+				$this->error($validate->getError());
+			}
+			$res = $this->_link->save($data,['id'=>input('id')]);
+			if($res !== false){
 				$this->success('修改成功','index');
+			}else{
+				$this->error('修改失败');
 			}
 			return;
 		}

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\link\add.htm";i:1524557698;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:62:"D:\wamp\www\bick\public/../application/admin\view\link\add.htm";i:1524561826;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -206,7 +206,7 @@
                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">链接名称</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="title" required="" type="text">
+                          <input class="form-control" required name="title" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
@@ -214,14 +214,14 @@
                       <div class="form-group">
                         <label for="group_id" class="col-sm-2 control-label no-padding-right">链接描述</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="desc" required="" type="text">
+                          <input class="form-control" required name="desc" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
                        <div class="form-group">
                         <label for="group_id" class="col-sm-2 control-label no-padding-right">链接地址</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="url" required="" type="text">
+                          <input class="form-control" required name="url" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>

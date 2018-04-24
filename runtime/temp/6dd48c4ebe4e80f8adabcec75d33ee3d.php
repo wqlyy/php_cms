@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\link\edit.htm";i:1524558285;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\link\edit.htm";i:1524562948;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -214,7 +214,7 @@
                       <div class="form-group">
                         <label for="group_id" class="col-sm-2 control-label no-padding-right">链接描述</label>
                         <div class="col-sm-6">
-                          <input value="<?php echo $link['desc']; ?>" class="form-control" name="desc" required="" type="text">
+                          <input value="<?php echo $link['desc']; ?>" class="form-control" name="desc" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>

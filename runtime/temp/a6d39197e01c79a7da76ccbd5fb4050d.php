@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:66:"D:\wamp\www\bick\public/../application/admin\view\article\list.htm";i:1524554937;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556257;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:66:"D:\wamp\www\bick\public/../application/admin\view\article\list.htm";i:1524554937;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524556878;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -143,6 +143,21 @@
 						<span class="menu-text">文章列表</span>
 						<i class="menu-expand"></i>
 					</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="menu-dropdown">
+        <i class="menu-icon fa fa-link"></i>
+        <span class="menu-text">友情链接</span>
+        <i class="menu-expand"></i>
+      </a>
+      <ul class="submenu">
+        <li>
+          <a href="<?php echo url('link/index'); ?>">
+            <span class="menu-text">链接列表</span>
+            <i class="menu-expand"></i>
+          </a>
         </li>
       </ul>
     </li>

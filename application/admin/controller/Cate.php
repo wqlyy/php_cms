@@ -21,7 +21,12 @@ class Cate extends Base{
 	}
 	public function add(){
 		if(request()->isPost()){
-			$add=$this->_cate->save(input('post.'));
+			$data = input('post.');
+			$validate = \think\Loader::validate('Cate');
+			if(!$validate->check($data)){
+				$this->error($validate->getError());
+			}
+			$add=$this->_cate->save($data);
 			if($add){
 				$this->success('添加栏目成功','index');
 			}else{
@@ -55,7 +60,12 @@ class Cate extends Base{
 	}
 	public function edit(){
 		if(request()->isPost()){
-			$res = $this->_cate->save(input('post.'),['id'=>input('id')]);
+			$data = input('post.');
+			$validate = \think\Loader::validate('Cate');
+			if(!$validate->scene('edit')->check($data)){
+				$this->error($validate->getError());
+			}
+			$res = $this->_cate->save($data,['id'=>input('id')]);
 			if(!$res){
 				$this->error('修改失败');
 			}else{

@@ -16,7 +16,10 @@ class Article extends Base{
 		if(request()->isPost()){
 			$data = input('post.');
 			
-			
+			$validate = \think\Loader::validate('Article');
+			if(!$validate->scene('add')->check($data)){
+				$this->error($validate->getError());
+			}
 			$res = $this->_article->save($data);
 			if($res){
 				$this->success('添加文章成功','index');
@@ -31,7 +34,12 @@ class Article extends Base{
 	}
 	public function edit(){
 		if(request()->isPost()){
-			$res = $this->_article->save(input('post.'),['id'=>input('id')]);
+			$data=input('post.');
+			$validate = \think\Loader::validate('Article');
+			if(!$validate->scene('add')->check($data)){
+				$this->error($validate->getError());
+			}
+			$res = $this->_article->save($data,['id'=>input('id')]);
 			if(!$res){
 				$this->error('修改失败');
 			}else{
