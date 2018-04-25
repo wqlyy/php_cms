@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\conf\edit.htm";i:1524626283;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\conf\conf.htm";i:1524638849;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +22,7 @@
 
 <body>
   <!-- 头部 -->
-  <div class="navbar">
+ <div class="navbar">
   <div class="navbar-inner">
     <div class="navbar-container">
       <!-- Navbar Barnd -->
@@ -192,63 +192,79 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="<?php echo url('conf/index'); ?>">配置管理</a></li>
-            <li class="active">编辑配置</li>
+            <li class="active">配置管理</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
+          <button type="button" class="btn btn-sm btn-azure btn-addon"> 网站配置
+          </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
-                <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">编辑配置</span>
-                </div>
                 <div class="widget-body">
-                  <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" method="post">
-                     <input type="hidden" name="id" value="<?php echo $confs['id']; ?>">
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">中文名称</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" value="<?php echo $confs['cnname']; ?>" required name="cnname" type="text">
-                        </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">英文名称</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" value="<?php echo $confs['enname']; ?>" required name="enname" type="text">
-                        </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
-                      </div>
-                      <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">配置类型</label>
-                        <div class="col-sm-6">
-                         <select disabled readonly name="type" class="form-control">
-                           <option value="0">——  请选择  ——</option>
-                           <option <?php if($confs['type'] == 1): ?>selected<?php endif; ?> value="1">单行文本</option>
-                           <option <?php if($confs['type'] == 2): ?>selected<?php endif; ?> value="2">多行文本</option>
-                           <option <?php if($confs['type'] == 3): ?>selected<?php endif; ?> value="3">单选按钮</option>
-                           <option <?php if($confs['type'] == 4): ?>selected<?php endif; ?> value="4">复选框</option>
-                           <option <?php if($confs['type'] == 5): ?>selected<?php endif; ?> value="5">下拉菜单</option>
-                         </select>
-                        </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
-                      </div>
-                       <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">可选值</label>
-                        <div class="col-sm-6">
-                          <textarea name="values" class="form-control"><?php echo $confs['values']; ?></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-default">保存信息</button>
-                        </div>
+                  <div class="flip-scroll">
+                    <form method="post" action="">
+                      <table class="table table-bordered table-hover">
+                        <thead class="">
+                          <tr>
+                           
+                            <th class="text-right" width="10%">配置名称</th>
+                            <th class="text-left">配置值</th>
+                          
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach($confres as $k => $v):?>
+                          <tr>
+                            <td align="right"><?php echo $v['cnname'];?></td>
+                            <td align="left">
+                              <?php if($v['type']==1):?>
+                                <input type="text" class="form-control" style="width: 50%" value="<?php echo $v['value'];?>" name="<?php echo $v['enname'];?>">
+                              <?php elseif($v['type']==2):?>
+                                <textarea name="<?php echo $v['enname'];?>" class="form-control" style="resize: none;width: 50%;"><?php echo trim($v['value']);?></textarea>
+                              <?php elseif($v['type']==3):
+                                  if($v['values']){
+                                    $arr=explode(',',$v['values']);
+                                  }
+                                  foreach($arr as $k1 => $v1):
+                                ?>
+                                  <label style="margin-right: 15px;">
+                                    <input type="radio" <?php if($v['value'] == $v1){echo 'checked';}?> value="<?php echo $v1;?>" name="<?php echo $v['enname'];?>">
+                                    <span class="text"><?php echo $v1;?></span>
+                                  </label>
+                                  
+                                  <?php endforeach;elseif($v['type']==4):?>
+                                  <label>
+                                    <input type="checkbox" <?php if(!empty($v['value'])){echo 'checked';}?> value="<?php echo $v['values'];?>" name="<?php echo $v['enname'];?>">
+                                    <span class="text"><?php echo $v['values'];?></span>
+                                  </label>
+                              <?php elseif($v['type']==5):
+                                 if($v['values']){
+                                    $arr=explode(',',$v['values']);
+                                  }
+                              ?>
+                                <select name="<?php echo $v['enname']?>" class="form-control" style="width: 50%">
+                                <?php foreach($arr as $k1 => $v1):?>
+                                  <option <?php if($v['value'] == $v1){echo 'selected';}?> value="<?php echo $v1;?>"><?php echo $v1;?></option>
+                                <?php endforeach;?>
+                                </select>
+                              <?php endif;?>
+                            </td>
+                           
+                          </tr>
+                          <?php endforeach;?>
+                          
+                        </tbody>
+                      </table>
+                      <div style="margin-top: 20px;width: 55%;text-align: right;">
+                        <input class="btn btn-md btn-primary" type="submit" value="提交更改">
                       </div>
                     </form>
+                  </div>
+                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
+
                   </div>
                 </div>
               </div>

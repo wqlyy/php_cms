@@ -58,4 +58,44 @@ class Conf extends Base{
 			$this->error('删除失败');
 		}
 	}
+	public function conf(){
+		if(request()->isPost()){
+			$data = input('post.');
+			$_confarr=db('conf')->field('enname')->select();
+			$confarr=array();
+			$_fromarr=array();
+			$checkboxarr=array();
+			foreach ($_confarr as $k => $v) {
+				$confarr[]=$v['enname'];
+			}
+			foreach ($data as $k => $v) {
+				$_fromarr[]=$k;
+			}
+			foreach ($confarr as $k => $v) {
+				if(!in_array($v,$_fromarr)){
+					$checkboxarr[]=$v;
+				}
+			}
+			if($checkboxarr){
+                foreach ($checkboxarr as $k => $v) {
+                   $this->_conf->where('enname',$v)->update(['value'=>'']);
+                }
+            }
+			if($data){
+				foreach ($data as $k => $v) {
+					$this->_conf->where('enname',$k)->update(['value'=>trim($v)]);
+				}
+				$this->success('修改配置成功');
+			}
+			
+			return;
+		}
+		$confres = $this->_conf->order('sort desc')->select();
+		if($confres){
+			$this->assign('confres',$confres);
+		}else{
+			$this->error('暂无配置');
+		}
+		return view();
+	}
 }

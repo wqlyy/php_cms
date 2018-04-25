@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\conf\list.htm";i:1524624588;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524622461;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\conf\list.htm";i:1524624588;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -169,7 +169,7 @@
 			</a>
       <ul class="submenu">
         <li>
-          <a href="/admin/document/index.html">
+          <a href="<?php echo url('conf/conf'); ?>">
 						<span class="menu-text">配置项</span>
 						<i class="menu-expand"></i>
 					</a>
