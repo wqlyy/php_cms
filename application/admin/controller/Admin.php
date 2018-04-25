@@ -12,7 +12,10 @@ class Admin extends Base{
     public function add(){
     	if(request()->isPost()){
     		$data = input('post.');
-            
+            $validate = \think\Loader::validate('Admin');
+            if(!$validate->scene('add')->check($data)){
+                $this->error($validate->getError());
+            }
             $res =  $this->_admin->add_admin($data);
     		// $res = db('admin')->insert($data);
     		if($res){
@@ -35,9 +38,13 @@ class Admin extends Base{
         
         if(request()->isPost()){
             $data = input('post.');
-            if(!$data['username']){
-                $this->error('用户名不能为空');
+             $validate = \think\Loader::validate('Admin');
+            if(!$validate->scene('edit')->check($data)){
+                $this->error($validate->getError());
             }
+            // if(!$data['username']){
+            //     $this->error('用户名不能为空');
+            // }
             if(!$data['password']){
                 $this->error('密码不能为空');
             }
