@@ -28,6 +28,10 @@
                 <div class="loginbox-textbox">
                     <input class="form-control" placeholder="password" name="password" type="password">
                 </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" style="float:left;width: 100px;" name="code" type="text">
+                    <div style="float:left;"><img width="120" src="{:captcha_src()}" onclick="this.src='{:captcha_src()}?'+new Date().getTime()" alt="captcha" /></div>
+                </div>
                 <div class="loginbox-submit">
                     <input class="btn btn-primary btn-block" value="Login" type="submit">
                 </div>
@@ -38,7 +42,9 @@
         </form>
     </div>
     <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
     <script src="__ADMIN__/style/jquery.js"></script>
+    
     <script src="__ADMIN__/style/bootstrap.js"></script>
     <!-- <script src="__ADMIN__/style/jquery_002.js"></script> -->
     <!--Beyond Scripts-->

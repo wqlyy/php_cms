@@ -19,6 +19,10 @@ class Conf extends Base{
 	public function add(){
 		if(request()->isPost()){
 			$data=input('post.');
+			$validate = \think\Loader::validate('Conf');
+			if(!$validate->check($data)){
+				$this->error($validate->getError());
+			}
 			if($data['values']){
 				$data['values'] = str_replace('，',',',$data['values']);
 			}
@@ -35,6 +39,10 @@ class Conf extends Base{
 	public function edit(){
 		if(request()->isPost()){
 			$data = input('post.');
+			$validate = \think\Loader::validate('Conf');
+			if(!$validate->scene('edit')->check($data)){
+				$this->error($validate->getError());
+			}
 			if($data['values']){
 				$data['values'] = str_replace('，',',',$data['values']);
 			}

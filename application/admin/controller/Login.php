@@ -9,6 +9,10 @@ class Login extends Base{
 	}
 	function index(){
 		if(request()->isPost()){
+			if(!input('code')){
+				$this->error('请输入验证码');
+			}
+			$this->check(input('code'));
 			$res = $this->_login->login(input('post.'));
 			switch ($res) {
 				case 1:
@@ -27,5 +31,11 @@ class Login extends Base{
 			return;
 		}
 		return view('login');
+	}
+	public function check($code=''){
+		$captcha = new \think\captcha\Captcha();
+		if(!$captcha->check($code)){
+			$this->error('验证码错误');
+		}
 	}
 }

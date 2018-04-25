@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\bick\public/../application/admin\view\login\login.htm";i:1524218511;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"D:\wamp\www\bick\public/../application/admin\view\login\login.htm";i:1524643976;}*/ ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"><!--Head--><head>
     <meta charset="utf-8">
@@ -29,6 +29,10 @@
                 <div class="loginbox-textbox">
                     <input class="form-control" placeholder="password" name="password" type="password">
                 </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" style="float:left;width: 100px;" name="code" type="text">
+                    <div style="float:left;"><img width="120" src="<?php echo captcha_src(); ?>" onclick="this.src='<?php echo captcha_src(); ?>?'+new Date().getTime()" alt="captcha" /></div>
+                </div>
                 <div class="loginbox-submit">
                     <input class="btn btn-primary btn-block" value="Login" type="submit">
                 </div>
@@ -39,7 +43,9 @@
         </form>
     </div>
     <!--Basic Scripts-->
+    <script src="/bick/public/static/admin/style/jquery_002.js"></script>
     <script src="/bick/public/static/admin/style/jquery.js"></script>
+    
     <script src="/bick/public/static/admin/style/bootstrap.js"></script>
     <!-- <script src="/bick/public/static/admin/style/jquery_002.js"></script> -->
     <!--Beyond Scripts-->
