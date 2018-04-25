@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524645162;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\wamp\www\bick\public/../application/admin\view\article\add.htm";i:1524551762;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -199,8 +199,8 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="<?php echo url('cate/index'); ?>">栏目管理</a></li>
-            <li class="active">新增栏目</li>
+            <li><a href="<?php echo url('cate/index'); ?>">文章管理</a></li>
+            <li class="active">新增文章</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
@@ -210,71 +210,65 @@
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
                 <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">新增栏目</span>
+                    <span class="widget-caption">新增文章</span>
                 </div>
                 <div class="widget-body">
                   <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" method="post">
+                    <form enctype="multipart/form-data" class="form-horizontal" role="form" action="" method="post">
                       <div class="form-group">
-                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
+                        <label for="title" class="col-sm-2 control-label no-padding-right">文章标题</label>
                         <div class="col-sm-6">
-                          <select name="pid" style="width: 100%;">
-                                <option value="0" selected="selected">顶级栏目</option>
+                          <input class="form-control" name="title" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="author" class="col-sm-2 control-label no-padding-right">文章作者</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" name="author" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="keywords" class="col-sm-2 control-label no-padding-right">关键词</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" name="keywords" required="" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="desc" class="col-sm-2 control-label no-padding-right">文章描述</label>
+                        <div class="col-sm-6">
+                         <textarea name="desc" class="form-control"></textarea>
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="pic" class="col-sm-2 control-label no-padding-right">文章缩略图</label>
+                        <div class="col-sm-6">
+                          <input name="pic" type="file">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+        
+                      <div class="form-group">
+                        <label for="cateid" class="col-sm-2 control-label no-padding-right">所属栏目</label>
+                        <div class="col-sm-6">
+                          <select name="cateid" style="width: 100%;">
                                 <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                 <option value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
                                 <?php endforeach; endif; else: echo "" ;endif; ?>
                             </select>
                         </div>
                       </div>
+                     
                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" placeholder="" name="catename" required="" type="text">
-                        </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目关键词</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" name="keywords" required="" type="text">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目描述</label>
-                        <div class="col-sm-6">
-                          <textarea class="form-control" name="desc"></textarea>
+                        <label for="content" class="col-sm-2 control-label no-padding-right">文章内容</label>
+                        <div class="col-sm-8">
+                         <textarea name="content" id="editor" style="height:300px;"></textarea>
                         </div>
                       </div>
                       
-                      <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
-                        <div class="col-sm-6">
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input checked type="radio" value="1" name="type" />
-                              <span class="text">文章列表</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input type="radio" class="inverted" name="type" value="2" />
-                              <span class="text">单页</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input type="radio" class="inverted" name="type" value="3" />
-                              <span class="text">图片列表</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目内容</label>
-                        <div class="col-sm-6">
-                          <textarea name="content" style="height:200px;" id="editor"></textarea>
-                        </div>
-                      </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                           <button type="submit" class="btn btn-default">保存信息</button>
@@ -299,12 +293,7 @@
   <!--Beyond Scripts-->
   <script src="/bick/public/static/admin/style/beyond.js"></script>
   <script type="text/javascript">
-     var ue = UE.getEditor('editor',{
-      toolbars: [
-        ['fullscreen', 'source', 'undo', 'redo'],
-        ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
-      ]
-     });
+     var ue = UE.getEditor('editor');
   </script>
 </body>
 

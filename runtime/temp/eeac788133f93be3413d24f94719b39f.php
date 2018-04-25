@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524645162;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\edit.htm";i:1524645512;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -200,7 +200,7 @@
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
             <li><a href="<?php echo url('cate/index'); ?>">栏目管理</a></li>
-            <li class="active">新增栏目</li>
+            <li class="active">编辑栏目</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
@@ -210,18 +210,19 @@
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
                 <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">新增栏目</span>
+                    <span class="widget-caption">编辑栏目</span>
                 </div>
                 <div class="widget-body">
                   <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="" method="post">
+                      <input type="hidden" value="<?php echo $cates['id']; ?>" name="id"/>
                       <div class="form-group">
                         <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
                         <div class="col-sm-6">
                           <select name="pid" style="width: 100%;">
                                 <option value="0" selected="selected">顶级栏目</option>
                                 <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                <option value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
+                                <option <?php if($cates['pid'] == $vo['id']): ?>selected<?php endif; ?> value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
                                 <?php endforeach; endif; else: echo "" ;endif; ?>
                             </select>
                         </div>
@@ -229,41 +230,40 @@
                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
                         <div class="col-sm-6">
-                          <input class="form-control" placeholder="" name="catename" required="" type="text">
+                          <input class="form-control" value="<?php echo $cates['catename']; ?>" name="catename" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
-                      <div class="form-group">
+                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">栏目关键词</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="keywords" required="" type="text">
+                          <input class="form-control" name="keywords" value="<?php echo $cates['keywords']; ?>" type="text">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">栏目描述</label>
                         <div class="col-sm-6">
-                          <textarea class="form-control" name="desc"></textarea>
+                          <textarea class="form-control" name="desc"><?php echo $cates['desc']; ?></textarea>
                         </div>
                       </div>
-                      
                       <div class="form-group">
                         <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
                         <div class="col-sm-6">
                           <div class="radio col-sm-3">
                             <label>
-                              <input checked type="radio" value="1" name="type" />
+                              <input <?php if($cates['type'] == 1): ?>checked='checked'<?php endif; ?> type="radio" value="1" name="type" />
                               <span class="text">文章列表</span>
                             </label>
                           </div>
                           <div class="radio col-sm-3">
                             <label>
-                              <input type="radio" class="inverted" name="type" value="2" />
+                              <input <?php if($cates['type'] == 2): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
                               <span class="text">单页</span>
                             </label>
                           </div>
                           <div class="radio col-sm-3">
                             <label>
-                              <input type="radio" class="inverted" name="type" value="3" />
+                              <input <?php if($cates['type'] == 3): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
                               <span class="text">图片列表</span>
                             </label>
                           </div>
@@ -272,7 +272,7 @@
                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">栏目内容</label>
                         <div class="col-sm-6">
-                          <textarea name="content" style="height:200px;" id="editor"></textarea>
+                          <textarea name="content" style="height:200px;" id="editor"><?php echo $cates['content']; ?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
