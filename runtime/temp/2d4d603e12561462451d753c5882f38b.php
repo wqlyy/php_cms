@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524216523;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524622461;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\conf\list.htm";i:1524624588;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524622461;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -192,49 +192,78 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li class="active">管理员管理</li>
+            <li class="active">配置管理</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('admin/add'); ?>'"> <i class="fa fa-plus"></i> Add
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('conf/add'); ?>'"> <i class="fa fa-plus"></i> Add
           </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
                 <div class="widget-body">
                   <div class="flip-scroll">
-                    <table class="table table-bordered table-hover">
-                      <thead class="">
+                    <form method="post" action="">
+                      <table class="table table-bordered table-hover">
+                        <thead class="">
+                          <tr>
+                            <th class="text-center" width="8%">ID</th>
+                            <th class="text-center" width="8%">排序</th>
+                            <th class="text-left">中文名称</th>
+                            <th class="text-left">英文名称</th>
+                            <th class="text-left">配置类型</th>
+                            <th class="text-center" width="16%">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php if(is_array($confres) || $confres instanceof \think\Collection || $confres instanceof \think\Paginator): $i = 0; $__LIST__ = $confres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                          <tr>
+                            <td align="center"><?php echo $vo['id']; ?></td>
+                            <td align="center">
+                              <input style="width: 50px;text-align: center;" type="text" value="<?php echo $vo['sort']; ?>" name="<?php echo $vo['id']; ?>">
+                            </td>
+                            <td align="left"><?php echo $vo['cnname']; ?></td>
+                            <td align="left"><?php echo $vo['enname']; ?></td>
+                            <td align="left">
+                              <?php if($vo['type'] == 1): ?>
+                              单行文本
+                              <?php elseif($vo['type'] == 2): ?>
+                              多行文本
+                              <?php elseif($vo['type'] == 3): ?>
+                              单选按钮
+                              <?php elseif($vo['type'] == 4): ?>
+                              多选按钮
+                              <?php elseif($vo['type'] == 5): ?>
+                              下拉菜单
+                              <?php else: ?>
+                              未知类型
+                              <?php endif; ?>
+                            </td>
+                            <td align="center">
+  														<a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
+  															<i class="fa fa-edit"></i> 编辑
+  														</a>
+                             
+  														<a href="javascript:;" onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+  															<i class="fa fa-trash-o"></i>删除
+  														</a>
+                             
+                            </td>
+                          </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
                         <tr>
-                          <th class="text-center" width="8%">ID</th>
-                          <th class="text-left">用户名称</th>
-                          <th class="text-center" width="16%">操作</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php if(is_array($admin_list) || $admin_list instanceof \think\Collection || $admin_list instanceof \think\Paginator): $i = 0; $__LIST__ = $admin_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$admin): $mod = ($i % 2 );++$i;?>
-                        <tr>
-                          <td align="center"><?php echo $admin['id']; ?></td>
-                          <td align="left"><?php echo $admin['username']; ?></td>
-                          <td align="center">
-														<a href="<?php echo url('admin/edit',array('id'=>$admin['id'])); ?>" class="btn btn-primary btn-sm shiny">
-															<i class="fa fa-edit"></i> 编辑
-														</a>
-                            <?php if($admin['role'] != 1): ?>
-														<a href="#" onClick="warning('确实要删除吗', '<?php echo url('admin/del',array('role'=>$admin['role'],'id'=>$admin['id'])); ?>')" class="btn btn-danger btn-sm shiny">
-															<i class="fa fa-trash-o"></i>删除
-														</a>
-                            <?php endif; ?>
+                          <td colspan="7">
+                            <input class="btn btn-sm btn-primary" type="submit" value="排序">
                           </td>
                         </tr>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    </form>
                   </div>
                   <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
-                    <?php echo $admin_list->render(); ?>
+                  <?php echo $confres->render(); ?>
                   </div>
                 </div>
               </div>

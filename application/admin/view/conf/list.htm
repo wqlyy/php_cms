@@ -18,13 +18,13 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li class="active">链接管理</li>
+            <li class="active">配置管理</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
-          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('link/add')}'"> <i class="fa fa-plus"></i> Add
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('conf/add')}'"> <i class="fa fa-plus"></i> Add
           </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -37,22 +37,36 @@
                           <tr>
                             <th class="text-center" width="8%">ID</th>
                             <th class="text-center" width="8%">排序</th>
-                            <th class="text-center">标题</th>
-                            <th class="text-center">链接地址</th>
-                            <th class="text-left">描述</th>
+                            <th class="text-left">中文名称</th>
+                            <th class="text-left">英文名称</th>
+                            <th class="text-left">配置类型</th>
                             <th class="text-center" width="16%">操作</th>
                           </tr>
                         </thead>
                         <tbody>
-                        {volist name="links" id="vo"}
+                          {volist name="confres" id="vo"}
                           <tr>
                             <td align="center">{$vo['id']}</td>
                             <td align="center">
                               <input style="width: 50px;text-align: center;" type="text" value="{$vo['sort']}" name="{$vo['id']}">
                             </td>
-                            <td align="center">{$vo['title']}</td>
-                            <td align="center"><a title="{$vo['title']}" target="_blank" href="<?php echo '//'.$vo['url'];?>">{$vo['url']}</a></td>
-                            <td align="left">{$vo['desc']}</td>
+                            <td align="left">{$vo['cnname']}</td>
+                            <td align="left">{$vo['enname']}</td>
+                            <td align="left">
+                              {if condition="$vo['type'] eq 1"}
+                              单行文本
+                              {elseif condition="$vo['type'] eq 2 "}
+                              多行文本
+                              {elseif condition="$vo['type'] eq 3 "}
+                              单选按钮
+                              {elseif condition="$vo['type'] eq 4 "}
+                              多选按钮
+                              {elseif condition="$vo['type'] eq 5 "}
+                              下拉菜单
+                              {else}
+                              未知类型
+                              {/if}
+                            </td>
                             <td align="center">
   														<a href="{:url('edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
   															<i class="fa fa-edit"></i> 编辑
@@ -66,7 +80,7 @@
                           </tr>
                         {/volist}
                         <tr>
-                          <td colspan="6">
+                          <td colspan="7">
                             <input class="btn btn-sm btn-primary" type="submit" value="排序">
                           </td>
                         </tr>
@@ -75,7 +89,7 @@
                     </form>
                   </div>
                   <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
-                   {$links->render()}
+                  {$confres->render()}
                   </div>
                 </div>
               </div>

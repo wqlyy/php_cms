@@ -5,6 +5,7 @@ use app\admin\model\Admin as AdminModel;
 use app\admin\model\Cate as CateModel;
 use app\admin\model\Article as ArticleModel;
 use app\admin\model\Link as LinkModel;
+use app\admin\model\Conf as ConfModel;
 /**
 * 
 */
@@ -18,6 +19,7 @@ class Base extends Controller
         $this->_cate = new CateModel();
         $this->_article = new ArticleModel();
         $this->_link = new LinkModel();
+        $this->_conf = new ConfModel();
 	}
 	
 	// function __construct(argument)
