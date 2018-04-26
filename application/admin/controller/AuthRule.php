@@ -63,7 +63,9 @@ class AuthRule extends Base{
 		return view();
 	}
 	public function del(){
-		$del = $this->_authRule->destroy(input('id'));
+		$res = $this->_authRule->getchildrenid(input('id'));
+		$res[] = intval(input('id'));
+		$del = $this->_authRule->destroy($res);
 		if($del){
 			$this->success('删除成功','index');
 		}else{
