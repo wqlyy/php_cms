@@ -40,6 +40,12 @@ class AuthRule extends Base{
 	public function edit(){
 		if(request()->isPost()){
 			$data = input('post.');
+			$plevel = $this->_authRule->field('level')->where('id',$data['pid'])->find();
+			if($plevel){
+				$data['level'] = $plevel['level'] + 1;
+			}else{
+				$data['level'] = 0;
+			}
 			$res = $this->_authRule->save($data,['id'=>input('id')]);
 			if($res !== false ){
 				$this->success('权限修改成功','index');
