@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:69:"D:\wamp\www\bick\public/../application/admin\view\auth_group\edit.htm";i:1524712842;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524648587;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:69:"D:\wamp\www\bick\public/../application/admin\view\auth_group\edit.htm";i:1524725934;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -121,7 +121,7 @@
           </a>
         </li>
         <li>
-          <a href="<?php echo url('admin/index'); ?>">
+          <a href="<?php echo url('auth_rule/index'); ?>">
             <span class="menu-text">权限列表</span>
             <i class="menu-expand"></i>
           </a>
@@ -242,7 +242,26 @@
                        <div class="form-group">
                         <label for="group_id" class="col-sm-2 control-label no-padding-right">用户组规则</label>
                         <div class="col-sm-6">
-                        <p class="help-block col-sm-4 red">* 配置权限</p>
+                          <table class="table table-hover">
+                              <thead class="bordered-darkorange">
+                                <tr>
+                                  <th>配置权限</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <?php if(is_array($authRuleres) || $authRuleres instanceof \think\Collection || $authRuleres instanceof \think\Paginator): $i = 0; $__LIST__ = $authRuleres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <?php echo str_repeat("&nbsp;",$vo['level']*6);?>
+                                    <input dataid="id-<?php echo $vo['dataid']; ?>" class="inverted checkbox-parent <?php if($vo['level'] != 0): ?>checkbox-child<?php endif; ?>" type="checkbox" name="">
+                                    <span style="<?php if($vo['level'] == 0): ?>font-weight: bold;<?php endif; ?>" class="text"><?php echo $vo['title']; ?></span>
+                                  </label>
+                                </td>
+                              </tr>
+                              <?php endforeach; endif; else: echo "" ;endif; ?>
+                              </tbody>
+                            </table>
                         </div>
                         
                       </div>
@@ -269,6 +288,43 @@
   <script src="/bick/public/static/admin/style/jquery.js"></script>
   <!--Beyond Scripts-->
   <script src="/bick/public/static/admin/style/beyond.js"></script>
+  <script>
+  /* 权限配置 */
+    $(function () {
+        //动态选择框，上下级选中状态变化
+        $('input.checkbox-parent').on('change', function () {
+            var dataid = $(this).attr("dataid");
+            $('input[dataid^=' + dataid + ']').prop('checked', $(this).is(':checked'));
+        });
+        $('input.checkbox-child').on('change', function () {
+            var dataid = $(this).attr("dataid");
+            dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+            var parent = $('input[dataid=' + dataid + ']');
+            if ($(this).is(':checked')) {
+                parent.prop('checked', true);
+                //循环到顶级
+                while (dataid.lastIndexOf("-") != 2) {
+                    dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+                    parent = $('input[dataid=' + dataid + ']');
+                    parent.prop('checked', true);
+                }
+            } else {
+                //父级
+                if ($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+                    parent.prop('checked', false);
+                    //循环到顶级
+                    while (dataid.lastIndexOf("-") != 2) {
+                        dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+                        parent = $('input[dataid=' + dataid + ']');
+                        if ($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+                            parent.prop('checked', false);
+                        }
+                    }
+                }
+            }
+        });
+    });
+  </script>
 </body>
 
 </html>

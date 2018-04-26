@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp\www\bick\public/../application/admin\view\index\index.htm";i:1524193477;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524648587;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp\www\bick\public/../application/admin\view\index\index.htm";i:1524193477;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -120,7 +120,7 @@
           </a>
         </li>
         <li>
-          <a href="<?php echo url('admin/index'); ?>">
+          <a href="<?php echo url('auth_rule/index'); ?>">
             <span class="menu-text">权限列表</span>
             <i class="menu-expand"></i>
           </a>

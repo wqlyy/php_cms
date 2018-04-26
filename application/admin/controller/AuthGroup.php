@@ -23,6 +23,9 @@ class AuthGroup extends Base{
 			}
 			return;
 		}
+		$authRule = new \app\admin\model\AuthRule();
+		$authRuleres = $authRule->authRuleTree();
+		$this->assign('authRuleres',$authRuleres);
 		return view();
 	}
 	public function del(){
@@ -47,7 +50,12 @@ class AuthGroup extends Base{
 			}
 		}
 		$groups = $this->_authgroup->find(input('id'));
-		$this->assign('groups',$groups);
+		$authRule = new \app\admin\model\AuthRule();
+		$authRuleres = $authRule->authRuleTree();
+		$this->assign([
+			'authRuleres'=>$authRuleres,
+			'groups'=>$groups,
+		]);
 		return view();
 	}
 }
