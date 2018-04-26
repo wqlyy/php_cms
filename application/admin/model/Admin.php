@@ -7,9 +7,16 @@ class Admin extends Model {
 			return false;
 		}
 		if($data['password']){
-			$data['password'] = md5('salt_'.md5($data['password']));
+			$data['password'] = md5('salt_'.md5($data['password']).sha1('_salt'));
 		}
-		if($this->save($data)){
+		$adminData=array();
+		$adminData['username'] = $data['username'];
+		$adminData['password'] = $data['password'];
+		if($this->save($adminData)){
+			$groupAccess=array();
+			$groupAccess['uid']=$this->id;
+			$groupAccess['group_id']=$data['group_id'];
+			db('auth_group_access')->insert($groupAccess);
 			return true;
 		}else{
 			return false;
@@ -26,6 +33,7 @@ class Admin extends Model {
 		    'username'  => $data['username'],
 		    'password' => $data['password'],
 		],['id' => $data['id']]);
+		db('auth_group_access')->where('uid',$data['id'])->update(['group_id'=>$data['group_id']]);
 		if($res==0 || $res){
 			return true;
 		}else{
@@ -40,7 +48,7 @@ class Admin extends Model {
 		if(!$admin){
 			return 1;//用户不存在
 		}else{
-			if($admin['password'] == md5('salt_'.md5($data['password']))){
+			if($admin['password'] == md5('salt_'.md5($data['password']).sha1('_salt'))){
 				session('id',$admin['id']);
 				session('user',$admin['username']);
 				return 2;//登录成功

@@ -25,6 +25,8 @@ class Admin extends Base{
     		}
     		return;
     	}
+        $authGroupRes = db('auth_group')->select();
+        $this->assign('authGroupRes',$authGroupRes);
     	return view('add');
     }
     public function edit($id){
@@ -48,14 +50,20 @@ class Admin extends Base{
             if(!$data['password']){
                 $this->error('密码不能为空');
             }
-            $data['password'] = $res['password'] == $data['password'] ? $data['password'] : md5('salt_'.md5($data['password']));
+            $data['password'] = $res['password'] == $data['password'] ? $data['password'] : md5('salt_'.md5($data['password']).sha1('_salt'));
             $res = $this->_admin->updateAdmin($data);
             if($res){
                 $this->success('修改成功','index');
             }
             return;
         }
-        $this->assign('admin',$res);
+        $authGroupRes = db('auth_group')->select();
+        $authGroupAccess = db('auth_group_access')->where('uid',$id)->find();
+        $this->assign([
+            'authGroupRes'=>$authGroupRes,
+            'admin'=>$res,
+            'authGroupAccess'=>$authGroupAccess,
+        ]);
     	return view('edit');
     }
     public function del($id,$role){
