@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524216523;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524731520;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -222,6 +222,7 @@
                         <tr>
                           <th class="text-center" width="8%">ID</th>
                           <th class="text-left">用户名称</th>
+                          <th class="text-center">所属用户组</th>
                           <th class="text-center" width="16%">操作</th>
                         </tr>
                       </thead>
@@ -230,6 +231,7 @@
                         <tr>
                           <td align="center"><?php echo $admin['id']; ?></td>
                           <td align="left"><?php echo $admin['username']; ?></td>
+                          <td align="left"><?php echo $admin['groupTitle']; ?></td>
                           <td align="center">
 														<a href="<?php echo url('admin/edit',array('id'=>$admin['id'])); ?>" class="btn btn-primary btn-sm shiny">
 															<i class="fa fa-edit"></i> 编辑

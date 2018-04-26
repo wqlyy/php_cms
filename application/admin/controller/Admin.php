@@ -5,7 +5,16 @@ use app\admin\controller\Base;
 class Admin extends Base{
 
     public function index(){
+        $auth = new Auth();
+
         $res = $this->_admin->get_list();
+        foreach ($res as $k => $v) {
+            $_groupTitle = $auth->getGroups($v['id']);
+            if(isset($_groupTitle)){
+                @$groupTitle = $_groupTitle[0]['title'];
+                $v['groupTitle'] = $groupTitle;
+            }
+        }
         $this->assign('admin_list',$res);
         return view('list');
     }
