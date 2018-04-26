@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\edit.htm";i:1524645512;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524648525;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:64:"D:\wamp\www\bick\public/../application/admin\view\admin\list.htm";i:1524216523;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524648587;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -18,18 +18,11 @@
     <link href="/bick/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="/bick/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="/bick/public/static/admin/style/animate.css" rel="stylesheet">
-
-    <!--UEditor-->
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 
 <body>
   <!-- 头部 -->
-  <div class="navbar">
+ <div class="navbar">
   <div class="navbar-inner">
     <div class="navbar-container">
       <!-- Navbar Barnd -->
@@ -96,7 +89,7 @@
   <div class="main-container container-fluid">
     <div class="page-container">
       <!-- Page Sidebar -->
-       <!-- Page Sidebar -->
+    	 <!-- Page Sidebar -->
 <div class="page-sidebar" id="sidebar">
   <!-- Page Sidebar Header-->
   <div class="sidebar-header-wrapper">
@@ -122,7 +115,7 @@
 					</a>
         </li>
         <li>
-          <a href="<?php echo url('authGroup/index'); ?>">
+          <a href="<?php echo url('auth_group/index'); ?>">
             <span class="menu-text">用户组列表</span>
             <i class="menu-expand"></i>
           </a>
@@ -211,88 +204,49 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="<?php echo url('cate/index'); ?>">栏目管理</a></li>
-            <li class="active">编辑栏目</li>
+            <li class="active">管理员管理</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
         <!-- Page Body -->
         <div class="page-body">
+          <button type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('admin/add'); ?>'"> <i class="fa fa-plus"></i> Add
+          </button>
           <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
-                <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">编辑栏目</span>
-                </div>
                 <div class="widget-body">
-                  <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" method="post">
-                      <input type="hidden" value="<?php echo $cates['id']; ?>" name="id"/>
-                      <div class="form-group">
-                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
-                        <div class="col-sm-6">
-                          <select name="pid" style="width: 100%;">
-                                <option value="0" selected="selected">顶级栏目</option>
-                                <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                <option <?php if($cates['pid'] == $vo['id']): ?>selected<?php endif; ?> value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
-                                <?php endforeach; endif; else: echo "" ;endif; ?>
-                            </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" value="<?php echo $cates['catename']; ?>" name="catename" required="" type="text">
-                        </div>
-                        <p class="help-block col-sm-4 red">* 必填</p>
-                      </div>
-                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目关键词</label>
-                        <div class="col-sm-6">
-                          <input class="form-control" name="keywords" value="<?php echo $cates['keywords']; ?>" type="text">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目描述</label>
-                        <div class="col-sm-6">
-                          <textarea class="form-control" name="desc"><?php echo $cates['desc']; ?></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
-                        <div class="col-sm-6">
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 1): ?>checked='checked'<?php endif; ?> type="radio" value="1" name="type" />
-                              <span class="text">文章列表</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 2): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
-                              <span class="text">单页</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 3): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
-                              <span class="text">图片列表</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目内容</label>
-                        <div class="col-sm-6">
-                          <textarea name="content" style="height:200px;" id="editor"><?php echo $cates['content']; ?></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-default">保存信息</button>
-                        </div>
-                      </div>
-                    </form>
+                  <div class="flip-scroll">
+                    <table class="table table-bordered table-hover">
+                      <thead class="">
+                        <tr>
+                          <th class="text-center" width="8%">ID</th>
+                          <th class="text-left">用户名称</th>
+                          <th class="text-center" width="16%">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if(is_array($admin_list) || $admin_list instanceof \think\Collection || $admin_list instanceof \think\Paginator): $i = 0; $__LIST__ = $admin_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$admin): $mod = ($i % 2 );++$i;?>
+                        <tr>
+                          <td align="center"><?php echo $admin['id']; ?></td>
+                          <td align="left"><?php echo $admin['username']; ?></td>
+                          <td align="center">
+														<a href="<?php echo url('admin/edit',array('id'=>$admin['id'])); ?>" class="btn btn-primary btn-sm shiny">
+															<i class="fa fa-edit"></i> 编辑
+														</a>
+                            <?php if($admin['role'] != 1): ?>
+														<a href="#" onClick="warning('确实要删除吗', '<?php echo url('admin/del',array('role'=>$admin['role'],'id'=>$admin['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+															<i class="fa fa-trash-o"></i>删除
+														</a>
+                            <?php endif; ?>
+                          </td>
+                        </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="text-right" style="margin-top:10px;"><!--*秘制占位*-->
+                    <?php echo $admin_list->render(); ?>
                   </div>
                 </div>
               </div>
@@ -310,14 +264,6 @@
   <script src="/bick/public/static/admin/style/jquery.js"></script>
   <!--Beyond Scripts-->
   <script src="/bick/public/static/admin/style/beyond.js"></script>
-  <script type="text/javascript">
-     var ue = UE.getEditor('editor',{
-      toolbars: [
-        ['fullscreen', 'source', 'undo', 'redo'],
-        ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
-      ]
-     });
-  </script>
 </body>
 
 </html>

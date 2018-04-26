@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524556632;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\list.htm";i:1524556632;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -113,6 +113,18 @@
 						<span class="menu-text">管理列表</span>
 						<i class="menu-expand"></i>
 					</a>
+        </li>
+        <li>
+          <a href="<?php echo url('auth_group/index'); ?>">
+            <span class="menu-text">用户组列表</span>
+            <i class="menu-expand"></i>
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo url('auth_rule/index'); ?>">
+            <span class="menu-text">权限列表</span>
+            <i class="menu-expand"></i>
+          </a>
         </li>
       </ul>
     </li>

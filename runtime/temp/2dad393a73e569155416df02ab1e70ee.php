@@ -1,7 +1,6 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp\www\bick\public/../application/admin\view\cate\edit.htm";i:1524645512;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524648525;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:71:"D:\wamp\www\bick\public/../application/admin\view\auth_rule\edit111.htm";i:1524194243;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>ThinkPHP--企业站</title>
@@ -18,15 +17,7 @@
     <link href="/bick/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="/bick/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="/bick/public/static/admin/style/animate.css" rel="stylesheet">
-
-    <!--UEditor-->
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="/bick/public/static/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
-
 <body>
   <!-- 头部 -->
   <div class="navbar">
@@ -122,13 +113,13 @@
 					</a>
         </li>
         <li>
-          <a href="<?php echo url('authGroup/index'); ?>">
+          <a href="<?php echo url('auth_group/index'); ?>">
             <span class="menu-text">用户组列表</span>
             <i class="menu-expand"></i>
           </a>
         </li>
         <li>
-          <a href="<?php echo url('admin/index'); ?>">
+          <a href="<?php echo url('auth_rule/index'); ?>">
             <span class="menu-text">权限列表</span>
             <i class="menu-expand"></i>
           </a>
@@ -211,8 +202,8 @@
         <div class="page-breadcrumbs">
           <ul class="breadcrumb">
             <li><a href="#">系统</a></li>
-            <li><a href="<?php echo url('cate/index'); ?>">栏目管理</a></li>
-            <li class="active">编辑栏目</li>
+            <li><a href="#">权限列表</a></li>
+            <li class="active">编辑权限</li>
           </ul>
         </div>
         <!-- /Page Breadcrumb -->
@@ -222,71 +213,70 @@
             <div class="col-lg-12 col-sm-12 col-xs-12">
               <div class="widget">
                 <div class="widget-header bordered-bottom bordered-blue">
-                    <span class="widget-caption">编辑栏目</span>
+                    <span class="widget-caption">新增规则</span>
                 </div>
                 <div class="widget-body">
                   <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="" method="post">
-                      <input type="hidden" value="<?php echo $cates['id']; ?>" name="id"/>
                       <div class="form-group">
-                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
+                        <label for="name" class="col-sm-2 control-label no-padding-right">规则类型</label>
                         <div class="col-sm-6">
-                          <select name="pid" style="width: 100%;">
-                                <option value="0" selected="selected">顶级栏目</option>
-                                <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                <option <?php if($cates['pid'] == $vo['id']): ?>selected<?php endif; ?> value="<?php echo $vo['id']; ?>"><?php if($vo['level'] != 0): ?>|<?php endif; ?><?php echo str_repeat('-',$vo['level']*4)?><?php echo $vo['catename']; ?></option>
-                                <?php endforeach; endif; else: echo "" ;endif; ?>
+                            <select name="type" style="width: 100%;">
+                                <option value="1" selected="selected">按节点</option>
+                                <option value="2">其他</option>
                             </select>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
+                        <label for="title" class="col-sm-2 control-label no-padding-right">名称</label>
                         <div class="col-sm-6">
-                          <input class="form-control" value="<?php echo $cates['catename']; ?>" name="catename" required="" type="text">
+                          <input class="form-control" id="title" placeholder="" name="title" value="文档" required="" type="text">
                         </div>
                         <p class="help-block col-sm-4 red">* 必填</p>
                       </div>
-                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目关键词</label>
+                      <div class="form-group">
+                        <label for="pid" class="col-sm-2 control-label no-padding-right">上级菜单</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="keywords" value="<?php echo $cates['keywords']; ?>" type="text">
+                          <select name="pid" style="width: 100%;">
+                            <option selected="selected" value="0">一级菜单</option>
+                            <option value="1">控制面板</option>
+                            <option value="19">文档</option>
+                            <option value="20">——文章列表</option>
+                            <option value="2">系统</option>
+                            <option value="13">——用户管理</option>
+                            <option value="3">——角色管理</option>
+                            <option value="4">——权限列表</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目描述</label>
+                        <label for="name" class="col-sm-2 control-label no-padding-right">节点/规则标识</label>
                         <div class="col-sm-6">
-                          <textarea class="form-control" name="desc"><?php echo $cates['desc']; ?></textarea>
+                          <input class="form-control" id="name" placeholder="" name="name" type="text">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="group_id" class="col-sm-2 control-label no-padding-right">栏目类型</label>
+                        <label for="condition" class="col-sm-2 control-label no-padding-right">附加条件</label>
                         <div class="col-sm-6">
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 1): ?>checked='checked'<?php endif; ?> type="radio" value="1" name="type" />
-                              <span class="text">文章列表</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 2): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
-                              <span class="text">单页</span>
-                            </label>
-                          </div>
-                          <div class="radio col-sm-3">
-                            <label>
-                              <input <?php if($cates['type'] == 3): ?>checked='checked'<?php endif; ?> type="radio" name="type" value="2" />
-                              <span class="text">图片列表</span>
-                            </label>
-                          </div>
+                          <input class="form-control" id="condition" placeholder="" name="condition" type="text">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="catename" class="col-sm-2 control-label no-padding-right">栏目内容</label>
+                        <label for="sort" class="col-sm-2 control-label no-padding-right">排序</label>
                         <div class="col-sm-6">
-                          <textarea name="content" style="height:200px;" id="editor"><?php echo $cates['content']; ?></textarea>
+                          <input class="form-control" id="sort" placeholder="" name="sort" value="2" type="text">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label for="is_show" class="col-sm-2 control-label no-padding-right">是否显示</label>
+                        <div class="col-xs-4">
+                          <label>
+                            <input class="checkbox-slider slider-icon yesno" name="is_show" checked="checked" type="checkbox">
+                            <span class="text"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <input name="id" value="19" type="hidden">
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                           <button type="submit" class="btn btn-default">保存信息</button>
@@ -310,14 +300,6 @@
   <script src="/bick/public/static/admin/style/jquery.js"></script>
   <!--Beyond Scripts-->
   <script src="/bick/public/static/admin/style/beyond.js"></script>
-  <script type="text/javascript">
-     var ue = UE.getEditor('editor',{
-      toolbars: [
-        ['fullscreen', 'source', 'undo', 'redo'],
-        ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
-      ]
-     });
-  </script>
 </body>
 
 </html>

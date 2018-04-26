@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524645162;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524626562;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:62:"D:\wamp\www\bick\public/../application/admin\view\cate\add.htm";i:1524645525;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -121,6 +121,18 @@
 						<i class="menu-expand"></i>
 					</a>
         </li>
+        <li>
+          <a href="<?php echo url('auth_group/index'); ?>">
+            <span class="menu-text">用户组列表</span>
+            <i class="menu-expand"></i>
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo url('auth_rule/index'); ?>">
+            <span class="menu-text">权限列表</span>
+            <i class="menu-expand"></i>
+          </a>
+        </li>
       </ul>
     </li>
      <li>
@@ -236,7 +248,7 @@
                       <div class="form-group">
                         <label for="catename" class="col-sm-2 control-label no-padding-right">栏目关键词</label>
                         <div class="col-sm-6">
-                          <input class="form-control" name="keywords" required="" type="text">
+                          <input class="form-control" name="keywords" type="text">
                         </div>
                       </div>
                       <div class="form-group">

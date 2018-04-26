@@ -66,10 +66,10 @@ class Cate extends Base{
 				$this->error($validate->getError());
 			}
 			$res = $this->_cate->save($data,['id'=>input('id')]);
-			if(!$res){
-				$this->error('修改失败');
-			}else{
+			if($res !== false ){
 				$this->success('修改成功','index');
+			}else{
+				$this->error('修改失败');
 			}
 			return;
 		}

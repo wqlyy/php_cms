@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+{include file="common/head" /}
+
+<body>
+  <!-- 头部 -->
+  {include file="common/top" /}
+  <!-- /头部 -->
+  <div class="main-container container-fluid">
+    <div class="page-container">
+      <!-- Page Sidebar -->
+      {include file="common/leftnav" /}
+      <!-- /Page Sidebar -->
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Page Breadcrumb -->
+        <div class="page-breadcrumbs">
+          <ul class="breadcrumb">
+            <li><a href="#">系统</a></li>
+            <li><a href="{:url('auth_group/index')}">用户组管理</a></li>
+            <li class="active">编辑用户组</li>
+          </ul>
+        </div>
+        <!-- /Page Breadcrumb -->
+        <!-- Page Body -->
+        <div class="page-body">
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">编辑用户组</span>
+                </div>
+                <div class="widget-body">
+                  <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" method="post">
+                     <input type="hidden" name="id" value="{$groups['id']}">
+                      <div class="form-group">
+                        <label for="catename" class="col-sm-2 control-label no-padding-right">用户组名称</label>
+                        <div class="col-sm-6">
+                          <input class="form-control" value="{$groups['title']}" name="title" type="text">
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                       
+                      <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">用户组启用状态</label>
+                        <div class="col-sm-6">
+                          <label>
+                            <input class="checkbox-slider colored-darkorange" {if condition="$groups['status'] eq 1"} checked{/if} type="checkbox" value="1" name="status">
+                            <span class="text"></span>
+                          </label>
+                        </div>
+                        <p class="help-block col-sm-4 red">* 必填</p>
+                      </div>
+                       <div class="form-group">
+                        <label for="group_id" class="col-sm-2 control-label no-padding-right">用户组规则</label>
+                        <div class="col-sm-6">
+                        <p class="help-block col-sm-4 red">* 配置权限</p>
+                        </div>
+                        
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">保存</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Page Body -->
+      </div>
+      <!-- /Page Content -->
+    </div>
+  </div>
+  <!--Basic Scripts-->
+  <script src="__ADMIN__/style/jquery_002.js"></script>
+  <script src="__ADMIN__/style/bootstrap.js"></script>
+  <script src="__ADMIN__/style/jquery.js"></script>
+  <!--Beyond Scripts-->
+  <script src="__ADMIN__/style/beyond.js"></script>
+</body>
+
+</html>
