@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:68:"D:\wamp\www\bick\public/../application/admin\view\auth_group\add.htm";i:1524725820;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:68:"D:\wamp\www\bick\public/../application/admin\view\auth_group\add.htm";i:1524726212;s:55:"D:\wamp\www\bick\application\admin\view\common\head.htm";i:1524194572;s:54:"D:\wamp\www\bick\application\admin\view\common\top.htm";i:1524469511;s:58:"D:\wamp\www\bick\application\admin\view\common\leftnav.htm";i:1524713357;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -254,14 +254,14 @@
                                 <td>
                                   <label>
                                     <?php echo str_repeat("&nbsp;",$vo['level']*6);?>
-                                    <input dataid="id-<?php echo $vo['dataid']; ?>" class="inverted checkbox-parent <?php if($vo['level'] != 0): ?>checkbox-child<?php endif; ?>" type="checkbox" name="">
+                                    <input dataid="id-<?php echo $vo['dataid']; ?>" class="inverted checkbox-parent <?php if($vo['level'] != 0): ?>checkbox-child<?php endif; ?>" type="checkbox" name="rules[]" value="<?php echo $vo['id']; ?>">
                                     <span style="<?php if($vo['level'] == 0): ?>font-weight: bold;<?php endif; ?>" class="text"><?php echo $vo['title']; ?></span>
                                   </label>
                                 </td>
                               </tr>
                               <?php endforeach; endif; else: echo "" ;endif; ?>
                             </tbody>
-                          </table>
+                           </table>
                         </div>
                         
                       </div>

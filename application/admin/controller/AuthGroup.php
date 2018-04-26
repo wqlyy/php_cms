@@ -15,6 +15,9 @@ class AuthGroup extends Base{
 			if(!isset($data['status'])){
 				$data['status']=0;
 			}
+			if(isset($data['rules'])){
+				$data['rules'] = implode(',',$data['rules']);
+			}
 			$res = $this->_authgroup->save($data);
 			if($res){
 				$this->success('用户组添加成功','index');

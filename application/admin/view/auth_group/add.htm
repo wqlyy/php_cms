@@ -68,14 +68,14 @@
                                 <td>
                                   <label>
                                     <?php echo str_repeat("&nbsp;",$vo['level']*6);?>
-                                    <input dataid="id-{$vo['dataid']}" class="inverted checkbox-parent {if condition="$vo['level'] neq 0"}checkbox-child{/if}" type="checkbox" name="">
+                                    <input dataid="id-{$vo['dataid']}" class="inverted checkbox-parent {if condition="$vo['level'] neq 0"}checkbox-child{/if}" type="checkbox" name="rules[]" value="{$vo['id']}">
                                     <span style="{if condition="$vo['level'] eq 0"}font-weight: bold;{/if}" class="text">{$vo['title']}</span>
                                   </label>
                                 </td>
                               </tr>
                               {/volist}
                             </tbody>
-                          </table>
+                           </table>
                         </div>
                         
                       </div>
